@@ -1,0 +1,22 @@
+.menu-bar {
+    height: 88vh;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 1rem;
+    position: relative;
+    background-color: #2F2F2F;
+}
+
+.btn-side:hover {
+    
+    background-color: #000000 !important;
+}
+
+.btn-side {
+    
+    background-color: #2F2F2F !important;
+}
+
+

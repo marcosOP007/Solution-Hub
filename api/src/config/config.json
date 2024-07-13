@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "marcosp",
+    "database": "garagem",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "marcosp",
+    "database": "garagem",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "marcosp",
+    "database": "garagem",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
