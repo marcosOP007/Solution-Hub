@@ -3,7 +3,7 @@ const { DataTypes, Model } = require('sequelize');
 
 class Problems extends Model {
 
-  static init(sequelize){
+  static init(sequelize) {
     super.init({
       name: DataTypes.STRING,
       problem: DataTypes.STRING,
@@ -11,13 +11,14 @@ class Problems extends Model {
       solution: DataTypes.STRING,
     },{
       sequelize,
+      modelName: 'Problem',
       tableName: 'Problems',
       timestamps: true,
       
   })
   }
   static associate(models) {
-    // define association here
+      this.belongsToMany(models.Tag, { foreignKey: 'problem_id', through: 'Tags_Problems', as: 'Tags' });
   }
 }
 

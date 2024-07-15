@@ -4,7 +4,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize){
-    await queryInterface.createTable('Problems', {
+    await queryInterface.createTable('Users', {
       
       id: {
         type: Sequelize.INTEGER,
@@ -16,19 +16,31 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      problem: {
-        type: Sequelize.STRING(2000),
+      permission: {
+        type: Sequelize.ENUM('USER', 'ADMIN'),
+        allowNull: false,
+        defaultValue: 'USER',
+      },
+      password: {
+        type: Sequelize.STRING(60),
         allowNull: false,
       },
-      solution: {
-        type: Sequelize.STRING(2000),
+      email: {
+        type: Sequelize.STRING(35),
         allowNull: false,
+        unique: true,
       },
-      date: {
+      status: {
+        type: Sequelize.ENUM('ACTIVE', 'INACTIVE', 'SUSPENDED'),
+        allowNull: false,
+        defaultValue: 'ACTIVE',
+      },
+  
+      last_login: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-
       updated_at: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -39,12 +51,15 @@ module.exports = {
         allowNull: true,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
+      photo: {
+        type: Sequelize.BLOB, 
+      },
 
 
     });
   },
 
   async down (queryInterface, Sequelize){
-    await queryInterface.dropTable('Problems');
+    await queryInterface.dropTable('Users');
   }
 };

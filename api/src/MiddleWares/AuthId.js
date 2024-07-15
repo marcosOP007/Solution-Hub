@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const UserController = require('../Controller/UserController')
+const UserController = require('../controller/UserController')
 
 
 const { promisify } = require('util');
