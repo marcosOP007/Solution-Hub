@@ -33,6 +33,14 @@ module.exports = {
         allowNull: true,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
+      token: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
+      editable: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: true,

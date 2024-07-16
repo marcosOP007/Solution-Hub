@@ -1,43 +1,54 @@
 const Problem = require('../models/problem');
 
-// Função para pegar todos problemas
 async function getAllProblems() {
-    return await Problem.findAll();
+    try {
+        return await Problem.findAll();
+    } catch (error) {
+        console.error('Error fetching problems:', error.message);
+    }
 }
 
-// Função para criar um novo problema
 async function createProblem(problemData) {
-    return await Problem.create(problemData);
+    try {
+        return await Problem.create(problemData);
+    } catch (error) {
+        console.error('Error creating problem:', error.message);
+    }
 }
 
-// Função para obter detalhes de um problema pelo ID
 async function getProblemById(problemId) {
-    const problem = await Problem.findByPk(problemId);
-    if (!problem) throw new Error('Usuário não encontrado.');
-    return problem;
+    try {
+        const problem = await Problem.findByPk(problemId);
+        if (!problem) throw new Error('Problem not found.');
+        return problem;
+    } catch (error) {
+        console.error('Error fetching problem by ID:', error.message);
+    }
 }
 
-// Função para atualizar um problema pelo ID
 async function updateProblem(problemId, problemData) {
-    const [updated] = await Problem.update(problemData, {
-        where: { id: problemId },
-    });
-
-    if (!updated) throw new Error('Problema não encontrado.');
-    return 'Problema atualizado com sucesso.';
+    try {
+        const [updated] = await Problem.update(problemData, {
+            where: { id: problemId },
+        });
+        if (!updated) throw new Error('Problem not found.');
+        return 'Problem successfully updated.';
+    } catch (error) {
+        console.error('Error updating problem:', error.message);
+    }
 }
 
-// Função para excluir um problema pelo ID
 async function deleteProblem(problemId) {
-    const deleted = await Problem.destroy({
-        where: { id: problemId },
-    });
-
-    if (!deleted) throw new Error('Usuário não encontrado.');
-    return 'Usuário excluído com sucesso.';
+    try {
+        const deleted = await Problem.destroy({
+            where: { id: problemId },
+        });
+        if (!deleted) throw new Error('Problem not found.');
+        return 'Problem successfully deleted.';
+    } catch (error) {
+        console.error('Error deleting problem:', error.message);
+    }
 }
-
-
 
 module.exports = {
     getAllProblems,
@@ -45,6 +56,4 @@ module.exports = {
     getProblemById,
     updateProblem,
     deleteProblem,
-
-  };
-  
+};

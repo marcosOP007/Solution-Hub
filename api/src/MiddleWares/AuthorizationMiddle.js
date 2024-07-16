@@ -1,3 +1,5 @@
+'use strict';
+
 const jwt = require("jsonwebtoken");
 const UserController = require('../Controller/UserController')
 
@@ -11,7 +13,7 @@ module.exports = async (req, res, next) => {
     return res.status(401).json({
       error: true,
       code: 130,
-      message: "O token de autenticação não existe!"
+      message: "The authentication token doesn't exist"
     })
   }
 
@@ -24,7 +26,7 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({
         error: true,
         code: 130,
-        message: "O token está expirado!"
+        message: "The token is expired"
       })
     } else {
       req.user_id = decoded.id;
@@ -35,7 +37,7 @@ module.exports = async (req, res, next) => {
         return res.status(401).json({
             error: true,
             code: 130,
-            message: "Usuario não existe! "
+            message: "Users don't exist"
         })
       }
    
@@ -43,7 +45,7 @@ module.exports = async (req, res, next) => {
         return res.status(401).json({
             error: true,
             code: 130,
-            message: "Usuario não tem permissão necessaria! "
+            message: "User does not have the necessary permissions"
         })
       }
       
@@ -54,7 +56,7 @@ module.exports = async (req, res, next) => {
     return res.status(401).json({
       error: true,
       code: 130,
-      message: "O token está inválido!"
+      message: 'The token is invalid'
     })
   }
 

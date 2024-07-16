@@ -10,7 +10,7 @@ function verifyUserPermission(...requiredPermissions) {
         return res.status(401).json({
           error: true,
           code: 130,
-          message: 'Token de autenticação ausente',
+          message: "The authentication token doesn't exist",
         });
       }
 
@@ -23,18 +23,18 @@ function verifyUserPermission(...requiredPermissions) {
         return res.status(401).json({
           error: true,
           code: 130,
-          message: 'Usuário não existe',
+          message: "Users don't exist",
         });
       }
 
       if (requiredPermissions.includes(user.permission_type)) {
         next();
       } else {
-        res.status(403).json({ error: 'Acesso negado: Permissão insuficiente' });
+        res.status(403).json({ error: 'Access denied: Insufficient permission' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Erro ao verificar permissões' });
+      res.status(500).json({ error: 'Error checking permissions' });
     }
   };
 }

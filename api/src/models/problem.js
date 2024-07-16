@@ -19,6 +19,7 @@ class Problems extends Model {
   }
   static associate(models) {
       this.belongsToMany(models.Tag, { foreignKey: 'problem_id', through: 'Tags_Problems', as: 'Tags' });
+      this.belongsToMany(models.User, { foreignKey: 'problem_id', through: 'Users_Problems', as: 'Users' });
   }
 }
 
