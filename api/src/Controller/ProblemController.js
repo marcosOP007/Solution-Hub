@@ -50,10 +50,23 @@ async function deleteProblem(problemId) {
     }
 }
 
+async function getAllTagsByProblem(problemId) {
+    try {
+        const problem = await User.findByPk(problemId, {
+            include: { model: Tag, as: 'Tags' },
+        });
+        if (!problem) throw new Error('Problem not found.');
+        return problem.Tags;
+    } catch (error) {
+        console.error('Error fetching tags by problem:', error.message);
+    }
+}
+
 module.exports = {
     getAllProblems,
     createProblem,
     getProblemById,
     updateProblem,
     deleteProblem,
+    getAllTagsByProblem,
 };

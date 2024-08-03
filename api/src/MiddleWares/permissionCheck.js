@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const UserController = require('../Controller/UserController')
+const UserController = require('../controller/UserController')
 const { promisify } = require('util');
 
 function verifyUserPermission(...requiredPermissions) {
@@ -8,8 +8,7 @@ function verifyUserPermission(...requiredPermissions) {
       const authToken = req.cookies.token;
       if (!authToken) {
         return res.status(401).json({
-          error: true,
-          code: 130,
+          fail: true,
           message: "The authentication token doesn't exist",
         });
       }
@@ -21,20 +20,19 @@ function verifyUserPermission(...requiredPermissions) {
 
       if (!user) {
         return res.status(401).json({
-          error: true,
-          code: 130,
+          fail: true,
           message: "Users don't exist",
         });
       }
 
-      if (requiredPermissions.includes(user.permission_type)) {
+      if (requiredPermissions.includes(user.permission)) {
         next();
       } else {
-        res.status(403).json({ error: 'Access denied: Insufficient permission' });
+        res.status(403).json({ message: 'Access denied: Insufficient permission', fail: true});
       }
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error checking permissions' });
+      console.error('Error checking permissions' , error);
+      res.status(500).json({ fail: true });
     }
   };
 }

@@ -1,9 +1,11 @@
 const express = require('express');
 const htmlRoutes = require('./src/routes/ProblemsRoutes');
-
+const userRouter = require('./src/routes/UserRoutes')
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
+
 
 require('./src/database/index')
 
@@ -14,6 +16,11 @@ app.use(express.urlencoded({ extended: false }))
 
 // app.use('/', express.static(path.join(__dirname, '/src/Views')))
 app.use('/index/', htmlRoutes);
+
+app.use('/user/', userRouter);
+
+
+app.use(cors());
 
 
 /*
@@ -27,10 +34,10 @@ app.all('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
     console.error(err);
-    res.status(500).json({ error: 'Ocorreu um erro no servidor.' });
+    res.status(500).json({ error: 'Server Error' });
 });
 
 
 
 
-app.listen(port, () => console.log("Server Running on port " + port));+9
+app.listen(port, () => console.log("Server Running on port " + port));

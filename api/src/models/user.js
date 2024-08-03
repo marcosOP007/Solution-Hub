@@ -37,7 +37,7 @@ class User extends Model {
                 allowNull: true,
             },
             photo: {
-                type: Sequelize.BLOB, 
+                type: DataTypes.BLOB, 
             },
         }, {
             sequelize,  

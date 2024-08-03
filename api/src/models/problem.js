@@ -9,6 +9,7 @@ class Problems extends Model {
       problem: DataTypes.STRING,
       date: DataTypes.STRING,
       solution: DataTypes.STRING,
+      token: DataTypes.STRING,
     },{
       sequelize,
       modelName: 'Problem',

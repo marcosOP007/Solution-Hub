@@ -6,8 +6,7 @@ module.exports = async (req, res, next) => {
   console.log(req.headers.authorization);
   if(!auth){
     return res.status(401).json({
-      error: true,
-      code: 130,
+      fail: true,
       message: "The authentication token doesn't exist"
     })
   }
@@ -17,8 +16,7 @@ module.exports = async (req, res, next) => {
     
     if(!decoded){
       return res.status(401).json({
-        error: true,
-        code: 130,
+        fail: true,
         message: "The token has expired"
       })
     } else {
@@ -30,8 +28,7 @@ module.exports = async (req, res, next) => {
     
   } catch {
     return res.status(401).json({
-      error: true,
-      code: 130,
+      fail: true,
       message: "The token is invalid!"
     })
   }

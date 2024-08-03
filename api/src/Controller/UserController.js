@@ -3,6 +3,7 @@ const Problem = require('../models/problem');
 
 async function getAllUsers() {
     try {
+        
         return await User.findAll();
     } catch (error) {
         console.error('Error fetching users:', error.message);
@@ -19,6 +20,7 @@ async function createUser(userData) {
 
 async function getUserByEmail(email) {
     try {
+        await User.sync();
         return await User.findOne({ where: { email: email } });
     } catch (error) {
         console.error('Error fetching user by email:', error.message);
