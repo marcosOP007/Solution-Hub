@@ -34,16 +34,15 @@ router.post('/login', async (req, res) => {
     const secret = process.env.SECRET;
 
     const token = jwt.sign({id: user.id}, secret, {expiresIn: '1h'});
-    res.cookie("token", token, {
-      httpOnly: true,
-    });
+    res.cookie('token', token, {httpOnly: true, sameSite: 'None', secure: true})
+  
 
     
     return res.status(200).json({message: 'login sucess', fail: false});
     
     
   } catch (e) {
-    console.error('error lo')
+    console.error('error lo', e)
     res.status(500).json({ msg: 'Erro no Servidor, tente mais tarde!!' });
   }
 
@@ -82,7 +81,7 @@ router.post('/register', async (req, res, next) => {
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
 
-
+      
       User.create({name: name, email: email, password: passwordHash})
 
       return res.status(200).json({message: "create success", fail: false});

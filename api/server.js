@@ -3,12 +3,20 @@ const htmlRoutes = require('./src/routes/ProblemsRoutes');
 const userRouter = require('./src/routes/UserRoutes')
 const cors = require('cors');
 
+
+const cookieParser = require("cookie-parser")
 const app = express();
 const port = 3000;
 
 
+app.use(cookieParser());
+
+app.use(cors())
+
 require('./src/database/index')
 
+
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
@@ -18,9 +26,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/index/', htmlRoutes);
 
 app.use('/user/', userRouter);
-
-
-app.use(cors());
 
 
 /*
